@@ -3,6 +3,10 @@ v. 1.0.2
 
 A culture-reduced, **yes/no (true/false)** reasoning test designed to estimate general intelligence using **simple English** and **abstract word problems only** (no images, no diagrams).
 
+**Status:** Early prototype – arithmetic generator + basic tests working; more item families in progress.
+
+**Who is this for?** Researchers, Fabled Sky collaborators, and external partners exploring lightweight reasoning benchmarks.
+
 The long-term goal is to build a large item bank and scoring model that **correlates strongly with standard IQ measures**, while:
 - Avoiding culture-specific knowledge and trivia  
 - Keeping language **ESL-friendly**  
@@ -47,7 +51,7 @@ The repository ships with a minimal, standard-library-only codebase so you can s
 2. Clone the repository and create an isolated environment:
 
    ```bash
-   git clone https://github.com/your-org/YN-Reasoning-Test.git
+   git clone https://github.com/FabledSky/YN-Reasoning-Test.git
    cd YN-Reasoning-Test
    python -m venv .venv
    source .venv/bin/activate  # On Windows use: .venv\\Scripts\\activate
@@ -107,6 +111,8 @@ pytest
 
 Tests live in `tests/` and cover JSON validation plus ESL-friendly constraints.
 
+**Agent Instructions:** For AI coding and documentation agents, see [AGENTS.md](./AGENTS.md) for the guardrails that govern item generation, language constraints, and psychometric rules.
+
 ---
 
 ## Project Goals
@@ -155,12 +161,20 @@ The test is intended to be:
 ## Test Format
 
 - **Number of items:** 100 (per standard form)  
-- **Response format:**  
-  - Boolean: `True` or `False` (or `Yes` / `No`, but internally treated as a boolean)  
-- **Item display:**  
-  - Exactly **one sentence** per item  
-  - No extra paragraphs or sub-bullets in the test UI  
-- **Time limits:**  
+- **Response format:**
+  - Boolean: `True` or `False` (or `Yes` / `No`, but internally treated as a boolean)
+- **Item display:**
+  - Exactly **one sentence** per item
+  - No extra paragraphs or sub-bullets in the test UI
+
+### Single-sentence definition (machine-checkable)
+
+- Exactly **one terminal period** (`.`) at the end of the text
+- No `?` or `!` characters
+- No newline characters
+- Use digits for numbers; avoid internal periods unless required for decimals
+- Keep total length concise: ≤ 25 words and ≤ 160 characters (see tests)
+- **Time limits:**
   - TBD; can be configured per deployment (e.g., ~30–45 minutes for 100 items)
 
 ---
@@ -478,6 +492,12 @@ The project is designed to support **large-scale item generation**. Difficulty c
 - **Logical strength**
   - “Some” vs “all” vs “no,” and whether conclusions are necessary or merely possible
 
+| Level  | Numbers used         | Typical operations             |
+| ------ | -------------------- | ------------------------------ |
+| Easy   | 1–20, round numbers  | One-step +/−, obvious patterns |
+| Medium | 1–50                 | 2-step reasoning, simple ×/÷   |
+| Hard   | up to 200, non-round | 2–3 steps, mixed patterns      |
+
 Rough distribution for a 100-item test (initial suggestion):
 
 - 20 items – Arithmetic comparisons  
@@ -511,9 +531,11 @@ To align scores with traditional IQ metrics, we will eventually need:
    - Convert raw scores into scaled scores and, if appropriate, IQ-like scores (e.g., mean 100, SD 15).  
    - Validate reliability (internal consistency) and test-retest stability.
 
-4. **Bias Checks**  
-   - Check for differential item functioning (DIF) across groups (e.g., different native languages, regions, genders).  
+4. **Bias Checks**
+   - Check for differential item functioning (DIF) across groups (e.g., different native languages, regions, genders).
    - Flag and adjust or remove biased items.
+
+**Important:** At this stage, this test is **experimental** and should **not** be used for hiring, diagnosis, or other high-stakes decisions until validation studies are completed.
 
 ---
 
@@ -532,7 +554,8 @@ A possible structure for this repo:
 ├── docs
 │   ├── language_guidelines.md   # Detailed ESL style guide
 │   ├── item_templates.md        # Formal templates for generation
-│   └── psychometrics_plan.md    # Analysis and validation plan
+│   ├── psychometrics_plan.md    # Analysis and validation plan
+│   └── api_example.md           # Minimal API sketch for serving items
 ├── src
 │   ├── generator
 │   │   ├── arithmetic.py        # Code to generate arithmetic items
@@ -565,6 +588,8 @@ Contributions are welcome, especially in the following areas:
     -   Clarity and simplicity
 
     -   Logical correctness
+
+See [LICENSE](./LICENSE) for current licensing terms (MIT).
 
     -   Appropriate difficulty
 

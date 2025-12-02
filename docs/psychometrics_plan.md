@@ -2,6 +2,8 @@
 
 A concise plan for piloting, analyzing, and calibrating the Yes/No reasoning test.
 
+**Status note:** The assessment is in a research phase and should not be used for hiring, diagnosis, or other high-stakes decisions until validation is complete.
+
 ## Pilot Study Steps
 - Recruit a **diverse sample** across regions, native languages, and genders; aim for parallel groups to check bias.
 - Collect **demographics** (age, gender, language background) for DIF analysis; record test form identifiers.
