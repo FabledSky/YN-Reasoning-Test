@@ -1,5 +1,5 @@
 # Fabled Sky – Yes/No Reasoning Test
-v. 1.0.0
+v. 1.0.1
 
 A culture-reduced, **yes/no (true/false)** reasoning test designed to estimate general intelligence using **simple English** and **abstract word problems only** (no images, no diagrams).
 
