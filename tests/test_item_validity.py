@@ -18,6 +18,8 @@ ALLOWED_FAMILIES = {
 }
 
 ALLOWED_STATUS = {"draft", "approved", "retired"}
+MAX_WORDS = 25
+MAX_CHARACTERS = 160
 
 
 def load_items(filename: str) -> list[dict]:
@@ -51,16 +53,23 @@ def assert_schema(item: dict, *, require_version: bool = False) -> None:
         assert isinstance(item["version"], int) and item["version"] > 0
 
 
-def count_sentence_endings(text: str) -> int:
-    return sum(text.count(punct) for punct in ".?!")
+def find_sentence_endings(text: str) -> list[str]:
+    return re.findall(r"[.!?](?!\d)", text)
 
 
 def is_single_sentence(text: str) -> bool:
-    return count_sentence_endings(text) == 1 and text.rstrip().endswith(('.', '?', '!'))
+    endings = find_sentence_endings(text)
+    if len(endings) != 1:
+        return False
+    return endings[0] == "." and text.rstrip().endswith(".")
 
 
-def is_esl_friendly_length(text: str, *, max_words: int = 25) -> bool:
+def is_esl_friendly_length(text: str, *, max_words: int = MAX_WORDS) -> bool:
     return len(text.split()) <= max_words
+
+
+def is_within_character_limit(text: str, *, max_characters: int = MAX_CHARACTERS) -> bool:
+    return len(text) <= max_characters
 
 
 ALLOWED_CHARS_PATTERN = re.compile(r"^[A-Za-z0-9 ,.;:'\"+\-!?=()]*$")
@@ -120,7 +129,9 @@ def test_single_sentence_and_length_and_characters():
         text = item["text"].strip()
         assert is_single_sentence(text), f"Item {item['id']} is not a single sentence"
         assert is_esl_friendly_length(text), f"Item {item['id']} exceeds ESL-friendly length"
+        assert is_within_character_limit(text), f"Item {item['id']} exceeds character limit"
         assert has_allowed_characters(text), f"Item {item['id']} contains unsupported characters"
+        assert "\n" not in text, f"Item {item['id']} contains newline characters"
 
 
 def test_boolean_answers():
