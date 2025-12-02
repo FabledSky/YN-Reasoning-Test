@@ -1,5 +1,5 @@
 # Fabled Sky – Yes/No Reasoning Test
-v. 1.0.1
+v. 1.0.2
 
 A culture-reduced, **yes/no (true/false)** reasoning test designed to estimate general intelligence using **simple English** and **abstract word problems only** (no images, no diagrams).
 
@@ -12,24 +12,100 @@ The long-term goal is to build a large item bank and scoring model that **correl
 
 ## Table of Contents
 
-1. [Project Goals](#project-goals)  
-2. [High-Level Design](#high-level-design)  
-3. [Test Format](#test-format)  
-4. [Design Principles](#design-principles)  
-5. [Language Guidelines (ESL-Friendly)](#language-guidelines-esl-friendly)  
-6. [Item Families (Question Types)](#item-families-question-types)  
-   - [Arithmetic Comparisons](#1-arithmetic-comparisons)  
-   - [Number Properties](#2-number-properties)  
-   - [Lists and Patterns](#3-lists-and-patterns)  
-   - [Transitive Comparisons](#4-transitive-comparisons)  
-   - [Set / Category Logic](#5-set--category-logic)  
-   - [Ordering / Spatial Reasoning](#6-ordering--spatial-reasoning)  
-   - [Points and Scoring Problems](#7-points-and-scoring-problems)  
-   - [Basic Logical Rules (If/Then/All/Some)](#8-basic-logical-rules-ifthenallsome)  
-7. [Difficulty and Item Bank Expansion](#difficulty-and-item-bank-expansion)  
-8. [Psychometrics and Validation](#psychometrics-and-validation)  
-9. [Repository Structure (Proposed)](#repository-structure-proposed)  
-10. [Contributing](#contributing)
+1. [Quickstart (Setup & Usage)](#quickstart-setup--usage)
+   - [Environment Setup](#environment-setup)
+   - [Generate Sample Items](#generate-sample-items)
+   - [Run Checks](#run-checks)
+2. [Project Goals](#project-goals)
+3. [High-Level Design](#high-level-design)
+4. [Test Format](#test-format)
+5. [Design Principles](#design-principles)
+6. [Language Guidelines (ESL-Friendly)](#language-guidelines-esl-friendly)
+7. [Item Families (Question Types)](#item-families-question-types)
+   - [Arithmetic Comparisons](#1-arithmetic-comparisons)
+   - [Number Properties](#2-number-properties)
+   - [Lists and Patterns](#3-lists-and-patterns)
+   - [Transitive Comparisons](#4-transitive-comparisons)
+   - [Set / Category Logic](#5-set--category-logic)
+   - [Ordering / Spatial Reasoning](#6-ordering--spatial-reasoning)
+   - [Points and Scoring Problems](#7-points-and-scoring-problems)
+   - [Basic Logical Rules (If/Then/All/Some)](#8-basic-logical-rules-ifthenallsome)
+8. [Difficulty and Item Bank Expansion](#difficulty-and-item-bank-expansion)
+9. [Psychometrics and Validation](#psychometrics-and-validation)
+10. [Repository Structure (Proposed)](#repository-structure-proposed)
+11. [Contributing](#contributing)
+
+---
+
+## Quickstart (Setup & Usage)
+
+The repository ships with a minimal, standard-library-only codebase so you can start generating or validating True/False items immediately. Follow the steps below to try the generators, persist items to JSON, and run the automated checks.
+
+### Environment Setup
+
+1. Install **Python 3.10+**.
+2. Clone the repository and create an isolated environment:
+
+   ```bash
+   git clone https://github.com/your-org/YN-Reasoning-Test.git
+   cd YN-Reasoning-Test
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows use: .venv\\Scripts\\activate
+   ```
+
+3. Install **pytest** if you plan to run the tests (the core generators use only the standard library):
+
+   ```bash
+   pip install pytest
+   ```
+
+### Generate Sample Items
+
+1. Use the generator modules in `src/generator/` to create True/False items. This snippet produces three arithmetic items and writes them to `data/items_raw.json` with two-space indentation:
+
+   ```bash
+   python - <<'PY'
+   import json
+   from dataclasses import asdict
+   from pathlib import Path
+
+   from src.generator import arithmetic
+
+   items = [
+       arithmetic.addition_equals(3, 4, 7),
+       arithmetic.multiplication_comparison(2, 5, 9),
+       arithmetic.division_whole(12, 3),
+   ]
+
+   data_path = Path("data/items_raw.json")
+   if data_path.exists():
+       current = json.loads(data_path.read_text(encoding="utf-8"))
+   else:
+       current = []
+
+   current.extend(asdict(item) for item in items)
+   data_path.write_text(json.dumps(current, indent=2), encoding="utf-8")
+   print(f"Saved {len(items)} items to {data_path}")
+   PY
+   ```
+
+2. To load approved items for delivery, read `data/items_clean.json` (same schema as above) and render one sentence at a time in your UI. Each record includes:
+
+   - `id`: string UUID
+   - `text`: single-sentence True/False prompt
+   - `answer`: boolean
+   - `family`: one of the supported families listed below
+   - Optional metadata: `difficulty`, `status`, `source`, `notes`
+
+### Run Checks
+
+Execute the test suite to validate schema rules, single-sentence enforcement, and family names:
+
+```bash
+pytest
+```
+
+Tests live in `tests/` and cover JSON validation plus ESL-friendly constraints.
 
 ---
 
