@@ -29,8 +29,7 @@ The long-term goal is to build a large item bank and scoring model that **correl
 7. [Difficulty and Item Bank Expansion](#difficulty-and-item-bank-expansion)  
 8. [Psychometrics and Validation](#psychometrics-and-validation)  
 9. [Repository Structure (Proposed)](#repository-structure-proposed)  
-10. [Contributing](#contributing)  
-11. [License](#license)
+10. [Contributing](#contributing)
 
 ---
 
@@ -470,3 +469,49 @@ A possible structure for this repo:
 │       └── api_example.md       # Notes on API/UI usage
 └── tests
     └── test_item_validity.py    # Tests to ensure items follow rules
+```
+
+## Contributing
+------------
+
+Contributions are welcome, especially in the following areas:
+
+-   New **item templates** that obey:
+
+    -   Single-sentence rule
+
+    -   ESL-friendly language
+
+    -   Culture-reduced content
+
+-   **Review and editing** of existing items for:
+
+    -   Clarity and simplicity
+
+    -   Logical correctness
+
+    -   Appropriate difficulty
+
+-   **Code contributions** for:
+
+    -   Item generation
+
+    -   Data collection pipelines
+
+    -   Psychometric analysis and scoring models
+
+-   **Research contributions** to improve:
+
+    -   Cross-cultural fairness
+
+    -   Correlation with established IQ tests
+
+    -   Detection and removal of biased items
+
+When contributing, please:
+
+1.  Follow the **language guidelines** and **design principles** in this README.
+
+2.  Add or update tests where relevant.
+
+3.  Include clear documentation for new item families or generation logic.
