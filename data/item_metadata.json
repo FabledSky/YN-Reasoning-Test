@@ -1,0 +1,69 @@
+{
+  "family_summary": {
+    "arithmetic": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.15,
+      "difficulty_placeholder": 1
+    },
+    "number_properties": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.35,
+      "difficulty_placeholder": 1
+    },
+    "patterns": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.28,
+      "difficulty_placeholder": 1
+    },
+    "transitivity": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.42,
+      "difficulty_placeholder": 1
+    },
+    "sets_logic": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.5,
+      "difficulty_placeholder": 1
+    },
+    "ordering": {
+      "raw": 1,
+      "clean": 1,
+      "approved": 1,
+      "draft": 1,
+      "difficulty_average": 0.22,
+      "difficulty_placeholder": 1
+    }
+  },
+  "difficulty_placeholders": {
+    "total_null_raw": 6,
+    "by_family": {
+      "arithmetic": 1,
+      "number_properties": 1,
+      "patterns": 1,
+      "transitivity": 1,
+      "sets_logic": 1,
+      "ordering": 1
+    }
+  },
+  "review_status": {
+    "draft_items": 6,
+    "approved_items": 6,
+    "retired_items": 0,
+    "notes": "Raw items remain drafts pending full review; clean items reflect approved versions."
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "2a43c3a4-38c5-4c24-8b2e-3c12e69dc5d3",
+    "text": "3 + 4 equals 7.",
+    "answer": true,
+    "family": "arithmetic",
+    "difficulty": 0.15,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Verified basic addition",
+    "tags": ["addition", "single_digit"],
+    "version": 1
+  },
+  {
+    "id": "5f7c7e8b-3620-4e7d-8ebd-1c1e5e54b5c6",
+    "text": "12 is a prime number.",
+    "answer": false,
+    "family": "number_properties",
+    "difficulty": 0.35,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Prime check reviewed",
+    "tags": ["primes", "composite_check"],
+    "version": 1
+  },
+  {
+    "id": "8c9c1e34-1b75-4e6c-9a77-3d7db7a94f98",
+    "text": "The sequence 2, 4, 8, 16 doubles each step.",
+    "answer": true,
+    "family": "patterns",
+    "difficulty": 0.28,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Pattern clarity confirmed",
+    "tags": ["geometric", "doubling"],
+    "version": 1
+  },
+  {
+    "id": "b8f6df2a-90ab-4c2f-9d2d-8410c6b8a252",
+    "text": "If Ana is taller than Ben and Ben is taller than Cara, then Ana is taller than Cara.",
+    "answer": true,
+    "family": "transitivity",
+    "difficulty": 0.42,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Transitive relation validated",
+    "tags": ["ordering", "logic"],
+    "version": 1
+  },
+  {
+    "id": "d2f3a9c0-3e1b-4e0e-9c6f-5f78a9a5f3e4",
+    "text": "If all squares are shapes and some shapes are blue, then all squares are blue.",
+    "answer": false,
+    "family": "sets_logic",
+    "difficulty": 0.5,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Scope fallacy noted",
+    "tags": ["quantifiers", "logic"],
+    "version": 1
+  },
+  {
+    "id": "f1b8c7d2-5e30-42c4-88e2-f6d7a5c9b1e0",
+    "text": "In a line where D stands after C and before E, D comes before E.",
+    "answer": true,
+    "family": "ordering",
+    "difficulty": 0.22,
+    "status": "approved",
+    "source": "auto_generated",
+    "notes": "Relative position affirmed",
+    "tags": ["ordering", "positions"],
+    "version": 1
+  }
+]
