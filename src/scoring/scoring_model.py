@@ -1,4 +1,4 @@
-"""Placeholder scoring interfaces for future IRT or rule-based evaluation.
+"""Lightweight scoring primitives for True/False responses.
 
 This module sketches how item responses may be scored. Implementations should
 stay pure and independent from storage or transport concerns. The current
